@@ -1,26 +1,21 @@
+// index.ts
 const server = Bun.serve({
   port: 3000,
   async fetch(req) {
     const url = new URL(req.url);
-    let path = url.pathname;
+    const path = url.pathname;
 
-    if (path === "/") path = "/index.html";
+    // If they ask for /styles.css, look at ./dist/styles.css
+    let filePath = `./dist${path === "/" ? "/index.html" : path}`;
+    let file = Bun.file(filePath);
 
-    let file = Bun.file(`./dist${path}`);
-
-    if (!(await file.exists()) && !path.includes(".")) {
-      const htmlPath = `${path}.html`;
-      const htmlFile = Bun.file(`./dist${htmlPath}`);
-      if (await htmlFile.exists()) {
-        file = htmlFile;
-      }
+    if (await file.exists()) {
+      return new Response(file);
     }
 
-    if (!(await file.exists())) {
-      file = Bun.file("./dist/index.html");
-    }
-
-    return new Response(file);
+    return new Response(Bun.file("./dist/index.html"), {
+      headers: { "Content-Type": "text/html" },
+    });
   },
 });
 

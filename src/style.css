@@ -1,1 +1,37 @@
 @import "tailwindcss";
+
+@theme {
+  --color-background: #141413;
+  --color-foreground: #e6d2b8;
+  --color-muted: #8c867e;
+  --color-primary: #8c754d;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-background);
+}
+
+hr {
+  border: 1px solid var(--color-foreground);
+}
+
+* {
+  font-family: "Noto Serif", serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+.noto-bold {
+  color: var(--color-fg);
+  font-family: "Noto Serif", serif;
+  font-optical-sizing: auto;
+  font-weight: bold;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}

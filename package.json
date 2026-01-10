@@ -1,7 +1,8 @@
 {
   "scripts": {
     "build": "rm -rf dist && bun build src/index.ts --outdir dist --minify && cp src/*.html dist/ && bunx @tailwindcss/cli -i src/style.css -o dist/style.css",
-    "start": "bun index.ts"
+    "start": "bun index.ts",
+    "dev": "bun run build && bun run start"
   },
   "dependencies": {
     "@tailwindcss/cli": "^4.1.18",

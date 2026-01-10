@@ -39,6 +39,7 @@
               pkgs.eslint
               pkgs.emmet-ls
               pkgs.prettier
+              pkgs.watchman
             ];
 
             # Libraries your project links to go here
@@ -46,13 +47,13 @@
               pkgs.bun
               pkgs.openssl
               pkgs.stdenv.cc.cc
-              pkgs.zlib
-              pkgs.clang-tools
             ];
 
             # Nix automatically handles PKG_CONFIG_PATH when openssl is in buildInputs
             # and pkg-config is in nativeBuildInputs.
-            shellHook = '''';
+            shellHook = ''
+              export LD_LIBRARY_PATH="${pkgs.lib.makeLibraryPath [ pkgs.stdenv.cc.cc.lib ]}:$LD_LIBRARY_PATH"
+            '';
           };
         }
       );
