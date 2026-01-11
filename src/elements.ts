@@ -93,6 +93,7 @@ export const about = (body: VNode[], sides: VNode[]) =>
             flex: true,
             "flex-row": true,
             "justify-between": true,
+            "gap-16": true,
           },
         },
         [
@@ -103,6 +104,7 @@ export const about = (body: VNode[], sides: VNode[]) =>
                 flex: true,
                 "flex-col": true,
                 "gap-2": true,
+                "w-1/2": true,
               },
             },
             [
@@ -112,7 +114,6 @@ export const about = (body: VNode[], sides: VNode[]) =>
                   class: {
                     "text-lg": true,
                     "text-muted": true,
-                    "max-w-1/2": true,
                     flex: true,
                     "flex-col": true,
                     "gap-4": true,
@@ -130,6 +131,7 @@ export const about = (body: VNode[], sides: VNode[]) =>
                 "flex-col": true,
                 "gap-8": true,
                 "justify-between": true,
+                "w-1/2": true,
               },
             },
             sides,
@@ -140,7 +142,7 @@ export const about = (body: VNode[], sides: VNode[]) =>
   );
 
 export const about_side = (title: string, text: string) =>
-  h("div", { class: { "w-full": true, "whitespace-nowrap": true } }, [
+  h("div", { class: { "w-full": true, "whitespace-nowrap": false } }, [
     h("p", { class: { "mb-2": true, "text-muted": true } }, [title]),
     h("p", { class: {} }, [text]),
   ]);

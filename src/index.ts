@@ -42,7 +42,10 @@ const view = async () =>
         [
           about_side("LANGUAGES", "Rust, C, Zig, Go, .NET, C#"),
           about_side("TOOLS", "Docker, Cargo, Nix/Flakes, Nginx"),
-          about_side("TOOLS", "Docker, Cargo, Nix/Flakes, Nginx"),
+          about_side(
+            "DOMAINS",
+            "Public transit routing infrastructure, Linux desktop automation, and high-performance developer libraries.",
+          ),
         ],
       ),
       line(),
