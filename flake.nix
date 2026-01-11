@@ -40,6 +40,7 @@
               pkgs.emmet-ls
               pkgs.prettier
               pkgs.watchman
+              pkgs.fswatch
             ];
 
             # Libraries your project links to go here

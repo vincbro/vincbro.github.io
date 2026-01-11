@@ -1,6 +1,9 @@
-import { h, vnode, type VNode } from "snabbdom";
+import { h, type VNode } from "snabbdom";
 
-export const line = () => h("hr", { class: { "w-full": true } });
+export const line = () =>
+  h("hr", {
+    class: { "w-full": true, "color-muted": true, "border-muted": true },
+  });
 
 export const header = (name: string, about: string, role: string) =>
   h(
@@ -27,7 +30,11 @@ export const header = (name: string, about: string, role: string) =>
           },
         },
         [
-          h("p", { class: { "text-md": true, "text-muted": true } }, [role]),
+          h(
+            "p",
+            { class: { "text-md": true, "text-muted": true, italic: true } },
+            [role],
+          ),
           h("h1", { class: { "text-8xl": true, "noto-bold": true } }, [name]),
           h("p", { class: { "text-lg": true, "text-muted": true } }, [about]),
         ],
@@ -39,44 +46,32 @@ export const header = (name: string, about: string, role: string) =>
             flex: true,
             "flex-row": true,
             "gap-4": true,
-            "text-muted": true,
           },
         },
-        [
-          h(
-            "a",
-            {
-              props: { href: "#work" },
-              class: {
-                "border-b": true,
-                "border-muted": true,
-                "hover:border-primary": true,
-                "hover:text-primary": true,
-                "transition-colors": true,
-              },
-            },
-            ["View Work"],
-          ),
-          h(
-            "a",
-            {
-              props: { href: "#contact" },
-              class: {
-                "border-b": true,
-                "border-muted": true,
-                "hover:border-primary": true,
-                "hover:text-primary": true,
-                "transition-colors": true,
-              },
-            },
-            ["Get in Touch"],
-          ),
-        ],
+        [link("View Work", "#work"), link("Get in Touch", "#contact")],
       ),
     ],
   );
 
-export const about = (body: string, sides: VNode[]) =>
+export const link = (text: string, url: string) =>
+  h(
+    "a",
+    {
+      props: { href: url },
+      class: {
+        "text-muted": true,
+        "border-b": true,
+        "border-muted": true,
+        "hover:border-primary": true,
+        "hover:text-primary": true,
+        "ease-in-out": true,
+        "transition-colors": true,
+      },
+    },
+    [text],
+  );
+
+export const about = (body: VNode[], sides: VNode[]) =>
   h(
     "section#about",
     {
@@ -94,7 +89,11 @@ export const about = (body: string, sides: VNode[]) =>
       h(
         "div",
         {
-          class: { flex: true, "flex-row": true, "justify-between": true },
+          class: {
+            flex: true,
+            "flex-row": true,
+            "justify-between": true,
+          },
         },
         [
           h(
@@ -104,13 +103,23 @@ export const about = (body: string, sides: VNode[]) =>
                 flex: true,
                 "flex-col": true,
                 "gap-2": true,
-                grow: true,
               },
             },
             [
-              h("p", { class: { "text-lg": true, "text-muted": true } }, [
+              h(
+                "p",
+                {
+                  class: {
+                    "text-lg": true,
+                    "text-muted": true,
+                    "max-w-1/2": true,
+                    flex: true,
+                    "flex-col": true,
+                    "gap-4": true,
+                  },
+                },
                 body,
-              ]),
+              ),
             ],
           ),
           h(
@@ -120,7 +129,6 @@ export const about = (body: string, sides: VNode[]) =>
                 flex: true,
                 "flex-col": true,
                 "gap-8": true,
-                grow: true,
                 "justify-between": true,
               },
             },
@@ -132,7 +140,7 @@ export const about = (body: string, sides: VNode[]) =>
   );
 
 export const about_side = (title: string, text: string) =>
-  h("div", [
+  h("div", { class: { "w-full": true, "whitespace-nowrap": true } }, [
     h("p", { class: { "mb-2": true, "text-muted": true } }, [title]),
     h("p", { class: {} }, [text]),
   ]);
@@ -166,10 +174,21 @@ export const selected_work = async (short_urls: string[]) => {
   );
 };
 const work = async (short_url: string) => {
-  const res = await fetch(`https://api.github.com/repos/${short_url}`);
-  const json = await res.json();
-  console.log(json);
-  return h("a", { props: { href: json.html_url } }, [
+  const url = `https://api.github.com/repos/${short_url}`;
+  let cache = localStorage.getItem(short_url);
+  if (cache === null) {
+    const res = await fetch(url);
+    if (!res.ok) {
+      return link(short_url, url);
+    }
+    const text = await res.text();
+    cache = text;
+  }
+
+  console.log(cache);
+  const data = JSON.parse(cache);
+
+  return h("a", { props: { href: data.html_url }, class: { group: true } }, [
     h("div", { class: {} }, [
       h(
         "div",
@@ -182,9 +201,20 @@ const work = async (short_url: string) => {
           },
         },
         [
-          h("h3", { class: { "text-3xl": true } }, [json.name]),
+          h(
+            "h3",
+            {
+              class: {
+                "text-3xl": true,
+                "group-hover:text-primary": true,
+                "ease-in-out": true,
+                "transition-colors": true,
+              },
+            },
+            [data.name],
+          ),
           h("p", { class: { "text-sm": true, "text-muted": true } }, [
-            `${json.stargazers_count} stargazers`,
+            `${data.stargazers_count} stargazers`,
           ]),
         ],
       ),
@@ -198,7 +228,7 @@ const work = async (short_url: string) => {
             "max-w-1/2": true,
           },
         },
-        [json.description],
+        [data.description],
       ),
     ]),
   ]);
@@ -222,9 +252,36 @@ export const contact = () =>
       h(
         "div",
         {
-          class: { flex: true, "flex-col": true, "gap-8": true },
+          class: { flex: true, "flex-row": true, "gap-8": true },
         },
-        ["test"],
+        [
+          link("Mail", "mailto:vincent.brodin21@gmail.com"),
+          link("Github", "https://github.com/vincbro"),
+          link(
+            "LinkedIn",
+            "https://www.linkedin.com/in/vincent-brodin-820051242/",
+          ),
+        ],
       ),
+    ],
+  );
+
+export const footer = () =>
+  h(
+    "footer#footer",
+    {
+      class: {
+        flex: true,
+        "flex-row": true,
+        "justify-between": true,
+        "my-8": true,
+        "px-24": true,
+      },
+    },
+    [
+      h("p", { class: { "text-muted": true } }, ["© 2026 Vincent Brodin"]),
+      h("p", { class: { "text-muted": true, italic: true } }, [
+        "something cleaver",
+      ]),
     ],
   );

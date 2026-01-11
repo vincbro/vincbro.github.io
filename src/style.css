@@ -15,15 +15,9 @@ body {
   background-color: var(--color-background);
 }
 
-hr {
-  border: 1px solid var(--color-foreground);
-}
-
 * {
   font-family: "Noto Serif", serif;
   font-optical-sizing: auto;
-  font-weight: normal;
-  font-style: normal;
   font-variation-settings: "wdth" 100;
 }
 
