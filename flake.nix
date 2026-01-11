@@ -41,6 +41,7 @@
               pkgs.prettier
               pkgs.watchman
               pkgs.fswatch
+              pkgs.dockerfile-language-server
             ];
 
             # Libraries your project links to go here

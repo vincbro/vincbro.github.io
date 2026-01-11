@@ -1,0 +1,7 @@
+services:
+  vinbro:
+    image: vincbrod/vincbro.github.io:latest
+    container_name: vincbro
+    restart: always
+    ports:
+      - "5090:80"
