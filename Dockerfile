@@ -3,7 +3,9 @@ WORKDIR /app
 
 COPY package.json ./
 COPY bun.lock ./
-COPY src ./
+COPY src ./src/
+COPY vite.config.ts ./
+COPY tsconfig.json ./
 
 RUN bun install
 
