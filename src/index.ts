@@ -20,8 +20,8 @@ const view = async () =>
     "div#app",
     {
       class: {
-        "min-w-screen": true,
-        "min-h-screen": true,
+        "w-full": true,
+        "h-full": true,
         "bg-background": true,
         "text-foreground": true,
       },

@@ -2,7 +2,7 @@ import { h, type VNode } from "snabbdom";
 
 export const line = () =>
   h("hr", {
-    class: { "w-full": true, "color-muted": true, "border-muted": true },
+    class: { "max-w-full": true, "color-muted": true, "border-muted": true },
   });
 
 export const header = (name: string, about: string, role: string) =>
@@ -11,7 +11,7 @@ export const header = (name: string, about: string, role: string) =>
     {
       class: {
         "min-h-screen": true,
-        "w-full": true,
+        "max-w-full": true,
         flex: true,
         "flex-col": true,
         "justify-center": true,
@@ -76,7 +76,7 @@ export const about = (body: VNode[], sides: VNode[]) =>
     "section#about",
     {
       class: {
-        "w-full": true,
+        "max-w-full": true,
         flex: true,
         "flex-col": true,
         "justify-center": true,
@@ -104,7 +104,7 @@ export const about = (body: VNode[], sides: VNode[]) =>
                 flex: true,
                 "flex-col": true,
                 "gap-2": true,
-                "w-1/2": true,
+                "max-w-1/2": true,
               },
             },
             [
@@ -131,7 +131,7 @@ export const about = (body: VNode[], sides: VNode[]) =>
                 "flex-col": true,
                 "gap-8": true,
                 "justify-between": true,
-                "w-1/2": true,
+                "max-w-1/2": true,
               },
             },
             sides,
@@ -142,7 +142,7 @@ export const about = (body: VNode[], sides: VNode[]) =>
   );
 
 export const about_side = (title: string, text: string) =>
-  h("div", { class: { "w-full": true, "whitespace-nowrap": false } }, [
+  h("div", { class: { "max-w-full": true, "whitespace-nowrap": false } }, [
     h("p", { class: { "mb-2": true, "text-muted": true } }, [title]),
     h("p", { class: {} }, [text]),
   ]);
@@ -155,7 +155,7 @@ export const selected_work = async (short_urls: string[]) => {
     "section#work",
     {
       class: {
-        "w-full": true,
+        "max-w-full": true,
         flex: true,
         "flex-col": true,
         "justify-center": true,
@@ -241,7 +241,7 @@ export const contact = () =>
     "section#contact",
     {
       class: {
-        "w-full": true,
+        "max-w-full": true,
         flex: true,
         "flex-col": true,
         "justify-center": true,
