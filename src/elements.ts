@@ -1,3 +1,4 @@
+import { Marked, Renderer } from "@ts-stack/markdown";
 import { h, type VNode } from "snabbdom";
 
 export const line = () =>
@@ -181,7 +182,7 @@ const work = async (short_url: string) => {
   if (cache === null) {
     const res = await fetch(url);
     if (!res.ok) {
-      return link(short_url, url);
+      return link(short_url, `https://github.com/${short_url}`);
     }
     const text = await res.text();
     cache = text;
@@ -283,7 +284,30 @@ export const footer = () =>
     [
       h("p", { class: { "text-muted": true } }, ["© 2026 Vincent Brodin"]),
       h("p", { class: { "text-muted": true, italic: true } }, [
-        "something cleaver",
+        "simplicity is found in transparency, not abstraction",
       ]),
     ],
   );
+
+export const markdown = (source: string) => {
+  Marked.setOptions({
+    renderer: new Renderer(),
+    gfm: true,
+    tables: true,
+    breaks: false,
+    pedantic: false,
+    sanitize: false,
+    smartLists: true,
+    smartypants: false,
+  });
+
+  const html = Marked.parse(source);
+
+  return h("div", {
+    props: { innerHTML: html },
+    class: {
+      prose: true,
+      "prose-main": true,
+    },
+  });
+};

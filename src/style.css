@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @theme {
   --color-background: #141413;
@@ -22,10 +23,47 @@ body {
 }
 
 .noto-bold {
-  color: var(--color-fg);
+  color: var(--color-foreground);
   font-family: "Noto Serif", serif;
   font-optical-sizing: auto;
   font-weight: bold;
   font-style: normal;
   font-variation-settings: "wdth" 100;
+}
+
+
+@utility prose-main {
+  --tw-prose-body: var(--color-muted);
+  --tw-prose-headings: var(--color-foreground);
+  --tw-prose-lead: var(--color-foreground);
+  --tw-prose-links: var(--color-primary);
+  --tw-prose-bold: var(--color-foreground);
+  --tw-prose-counters: var(--color-muted);
+  --tw-prose-bullets: var(--color-primary);
+  --tw-prose-hr: var(--color-muted);
+  --tw-prose-quotes: var(--color-foreground);
+  --tw-prose-quote-borders: var(--color-primary);
+  --tw-prose-captions: var(--color-muted);
+  --tw-prose-code: var(--color-primary);
+  --tw-prose-pre-code: var(--color-foreground);
+  --tw-prose-pre-bg: var(--color-background);
+  --tw-prose-th-borders: var(--color-muted);
+  --tw-prose-td-borders: var(--color-muted);
+
+  --tw-prose-invert-body: var(--color-foreground);
+  --tw-prose-invert-headings: var(--color-foreground);
+  --tw-prose-invert-lead: var(--color-foreground);
+  --tw-prose-invert-links: var(--color-primary);
+  --tw-prose-invert-bold: var(--color-foreground);
+  --tw-prose-invert-counters: var(--color-muted);
+  --tw-prose-invert-bullets: var(--color-primary);
+  --tw-prose-invert-hr: var(--color-muted);
+  --tw-prose-invert-quotes: var(--color-foreground);
+  --tw-prose-invert-quote-borders: var(--color-primary);
+  --tw-prose-invert-captions: var(--color-muted);
+  --tw-prose-invert-code: var(--color-primary);
+  --tw-prose-invert-pre-code: var(--color-foreground);
+  --tw-prose-invert-pre-bg: var(--color-background);
+  --tw-prose-invert-th-borders: var(--color-muted);
+  --tw-prose-invert-td-borders: var(--color-muted);
 }
