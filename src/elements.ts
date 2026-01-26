@@ -49,7 +49,11 @@ export const header = (name: string, about: string, role: string) =>
             "gap-4": true,
           },
         },
-        [link("View Work", "#work"), link("Get in Touch", "#contact")],
+        [
+          link("View Work", "#work"),
+          // link("Read Posts", "/posts"),
+          link("Get in Touch", "#contact"),
+        ],
       ),
     ],
   );
@@ -274,6 +278,7 @@ export const footer = () =>
     "footer#footer",
     {
       class: {
+        "w-screen": true,
         flex: true,
         "flex-row": true,
         "justify-between": true,
