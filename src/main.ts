@@ -49,6 +49,7 @@ export const main_page = async () =>
       line(),
       await selected_work([
         "vincbro/blaise",
+        "vincbro/pascal",
         "vincbro/nest",
         "vincbro/suddig",
         "vincbro/csv",
