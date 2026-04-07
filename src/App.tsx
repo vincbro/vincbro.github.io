@@ -97,7 +97,6 @@ function App() {
 
       <footer>
         <span>© 2026 Vincent Brodin</span>
-        <span>simplicity is found in transparency, not abstraction</span>
       </footer>
     </div>
   );

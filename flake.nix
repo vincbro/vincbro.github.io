@@ -39,22 +39,17 @@
               pkgs.eslint
               pkgs.emmet-ls
               pkgs.prettier
-              pkgs.watchman
-              pkgs.fswatch
               pkgs.dockerfile-language-server
+              pkgs.bun
             ];
 
             # Libraries your project links to go here
             buildInputs = [
-              pkgs.bun
-              pkgs.openssl
-              pkgs.stdenv.cc.cc
             ];
 
             # Nix automatically handles PKG_CONFIG_PATH when openssl is in buildInputs
             # and pkg-config is in nativeBuildInputs.
             shellHook = ''
-              export LD_LIBRARY_PATH="${pkgs.lib.makeLibraryPath [ pkgs.stdenv.cc.cc.lib ]}:$LD_LIBRARY_PATH"
             '';
           };
         }
